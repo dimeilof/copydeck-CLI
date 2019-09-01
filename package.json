@@ -1,7 +1,7 @@
 {
   "name": "copydeck-cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a command line interface that allows you to transform Android, IOS or i18Next ressources files into a more user friendly Csv files. The translation from any type of file to any other type of file.",
   "main": "src/index.js",
   "bin": {
     "copydeck": "bin/copydeck-cli"
@@ -9,15 +9,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/helsing45/copydeck-CLI.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jean-Christophe Décary",
   "license": "MIT",
   "dependencies": {
     "arg": "^4.1.1",

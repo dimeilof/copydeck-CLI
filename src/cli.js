@@ -1,10 +1,10 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
-import copydeck from 'copydeck-module'
-const fs = require('fs');
+import copydeck from 'copydeck-module';
+import fs from 'fs';
 
 export async function cli(args) {
-    let options = pargeArgsIntoOptions(args);
+    let options = parseArgsIntoOptions(args);
 
     options = await promptForMissingOptions(options);
     if (options["init"]) {
@@ -32,7 +32,7 @@ export async function cli(args) {
     }
 }
 
-function pargeArgsIntoOptions(rawArgs) {
+function parseArgsIntoOptions(rawArgs) {
     const args = arg({
         '--init': String,
         '--translate_path': String,
@@ -64,7 +64,6 @@ function pargeArgsIntoOptions(rawArgs) {
         let data = fs.readFileSync("config.json", "utf8");
         return JSON.parse(data);
     }
-
 
     return {};
 }
