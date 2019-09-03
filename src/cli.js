@@ -1,9 +1,43 @@
 import arg from 'arg';
+import commander from 'commander';
 import inquirer from 'inquirer';
 import copydeck from 'copydeck-module';
 import fs from 'fs';
+import cliConfig from '../package.json';
+import moduleConfig from 'copydeck-module/package.json';
 
 export async function cli(args) {
+    const program = new commander.Command();
+    program.name('copydeck');
+    program.usage('[command] [options]');
+    program.description(cliConfig.description);
+    program.version(`${cliConfig.name}: ${cliConfig.version}\n${moduleConfig.name}: ${moduleConfig.version}`, '-v, --version');
+
+    let init = program.command('init [path]');
+    options(init);
+    init.action(() => {
+        console.log('test');
+    });
+
+    let translate = program.command('translate [path]');
+    options(translate);
+    translate.action(() => {
+        console.log('test');
+    });
+
+    program.parse(args);
+}
+
+function options(command) {
+    command
+        .option('--from', 'Reading file type')
+        .option('--to', 'Writing file type')
+        .option('--read-path', 'Reading file path')
+        .option('--write-path', 'Writing file path')
+        .option('--filter', 'Filter by');
+}
+
+export async function cli2(args) {
     let options = parseArgsIntoOptions(args);
 
     options = await promptForMissingOptions(options);
@@ -39,9 +73,9 @@ function parseArgsIntoOptions(rawArgs) {
         '-i': '--init',
         '-t': '--translate_path'
     }, {
-        argv: rawArgs.slice(2),
-        stopAtPositional: true
-    });
+            argv: rawArgs.slice(2),
+            stopAtPositional: true
+        });
 
     if (args["--init"]) {
         return {
